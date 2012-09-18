@@ -1,0 +1,5 @@
+django>=1.4
+PyYAML
+git+https://github.com/suvit/django-mailer.git#egg=django-mailer
+
+django-websmsru
