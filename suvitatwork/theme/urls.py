@@ -15,7 +15,7 @@ urlpatterns = patterns('suvitatwork.theme.views',
         'support_browsers',
         name='support_browsers'),
     url(r'^contacts/$',
-        TemplateView.as_view(template_name='base.html'),
+        TemplateView.as_view(template_name='contacts.html'),
         name='contacts'),
 
 )
