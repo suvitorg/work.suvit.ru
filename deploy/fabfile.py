@@ -17,17 +17,15 @@ class SuvitWorkDeployment(Deployment):
 
     def node2(self):
         fab.env.hosts = ["node2.suvit.ru"]
-        fab.env.project_name = "work.suvit.ru/suvitatwork"
-        fab.env.user = 'chernov'
-        fab.env.instance_name = fab.env.user
-
         fab.env.user = "u24337"
+
+        fab.env.project_name = "work.suvit.ru/suvitatwork"
+        fab.env.instance_name = fab.env.user
         fab.env.remote_dir = _("/home/%(user)s/%(project_name)s/")
 
         fab.env.os = Debian()
 
         fab.env.db = SqliteDatabase()
-        fab.env.db_pass = ''
 
         fab.env.project = Project()
         fab.env.project.django = Django14(_('%(remote_dir)s/%(project_name)s/'),
