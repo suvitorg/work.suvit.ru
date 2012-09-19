@@ -1,5 +1,7 @@
 django>=1.4
+Unipath
 PyYAML
 git+https://github.com/suvit/django-mailer.git#egg=django-mailer
+django-userena
 
-django-websmsru
+#django-websmsru

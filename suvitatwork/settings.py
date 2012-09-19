@@ -1,5 +1,16 @@
 # Django settings for suvitatwork project.
 
+import os
+import json
+from unipath import FSPath as Path
+
+# The full path to the django_website directory.
+BASE = Path(__file__).absolute().ancestor(2)
+SECRETS = json.load(open(BASE.ancestor(1).child('secrets.json')))
+
+# Far too clever trick to know if we're running on the deployment server.
+PRODUCTION = ('DJANGOPROJECT_DEBUG' not in os.environ)
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -11,8 +22,8 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '',                      # Or path to database file if using sqlite3.
+        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'base.sqlite',                      # Or path to database file if using sqlite3.
         'USER': '',                      # Not used with sqlite3.
         'PASSWORD': '',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
@@ -27,11 +38,11 @@ DATABASES = {
 # timezone as the operating system.
 # If running in a Windows environment this must be set to the same as your
 # system time zone.
-TIME_ZONE = 'America/Chicago'
+TIME_ZONE = 'Asia/Yekaterinburg'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru-ru'
 
 SITE_ID = 1
 
@@ -48,18 +59,18 @@ USE_TZ = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
-MEDIA_ROOT = ''
+MEDIA_ROOT = BASE + '/media'
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
 # Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
-MEDIA_URL = ''
+MEDIA_URL = '/media/'
 
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = ''
+STATIC_ROOT = BASE + '/static'
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
@@ -81,7 +92,7 @@ STATICFILES_FINDERS = (
 )
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = '&amp;f+mz$w#p%=r*65j)y3-uz&amp;h5ou4t6@_6c@qom2mxt^quw%j8g'
+SECRET_KEY = str(SECRETS['secret_key'])
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -90,7 +101,7 @@ TEMPLATE_LOADERS = (
 #     'django.template.loaders.eggs.Loader',
 )
 
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE_CLASSES = [
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -98,7 +109,11 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
-)
+]
+if PRODUCTION:
+    MIDDLEWARE_CLASSES.insert(0, 'django.middleware.cache.UpdateCacheMiddleware')
+    MIDDLEWARE_CLASSES.append('django.middleware.cache.FetchFromCacheMiddleware')
+
 
 ROOT_URLCONF = 'suvitatwork.urls'
 
@@ -118,10 +133,14 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # Uncomment the next line to enable the admin:
-    # 'django.contrib.admin',
-    # Uncomment the next line to enable admin documentation:
-    # 'django.contrib.admindocs',
+    'django.contrib.admin',
+
+    'suvitatwork.theme',
+
+    'userena',
+    'userena.contrib.umessages',
+    'guardian',
+    'easy_thumbnails',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -152,3 +171,22 @@ LOGGING = {
         },
     }
 }
+
+# Log errors to Sentry instead of email, if available.
+if 'sentry_dsn' in SECRETS:
+    INSTALLED_APPS.append('raven.contrib.django')
+    SENTRY_DSN = SECRETS['sentry_dsn']
+    LOGGING["loggers"]["django.request"]["handlers"].remove("mail_admins")
+
+AUTHENTICATION_BACKENDS = (
+    'userena.backends.UserenaAuthenticationBackend',
+    'guardian.backends.ObjectPermissionBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)
+AUTH_PROFILE_MODULE = 'theme.MyProfile'
+
+LOGIN_REDIRECT_URL = '/accounts/%(username)s/'
+LOGIN_URL = '/accounts/signin/'
+LOGOUT_URL = '/accounts/signout/'
+
+ANONYMOUS_USER_ID = -1

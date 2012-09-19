@@ -1,4 +1,7 @@
 *.log
 *.pot
 *.pyc
+env
+base.sqlite
+python.bat
 local_settings.py
