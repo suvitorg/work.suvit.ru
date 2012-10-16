@@ -23,13 +23,19 @@
     </tr>
     {% endfor %}
     </tr>
+    <tr class="warning">
+      <td>Примечание</td>
+      {% for plan in plans %}
+        <td>{{ plan.note }}</td>
+      {% endfor %}
+    </tr>
     <tr class="info">
-      <td>Стоимость</td>
+      <th>Стоимость</th>
       {% for plan in plans %}
         <td>{{ plan.cost }} руб.</td>
       {% endfor %}
 
     </tr>
   </tbody>
-<table>
+</table>
 {% endblock %}
