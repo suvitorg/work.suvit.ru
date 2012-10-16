@@ -1,4 +1,5 @@
 # Create your views here.
+from django.conf import settings
 from django.template.response import TemplateResponse
 
 def main(request):
@@ -13,3 +14,11 @@ def support_browsers(request):
     return TemplateResponse(request, 'support/browsers.html',
                             {})
 
+def support_plans(request):
+    return TemplateResponse(request, 'support/plans.html',
+                            {'plans': settings.PLANS,
+                             'features': settings.PLAN_FEATURES})
+
+def support_docs(request):
+    return TemplateResponse(request, 'support/docs.html',
+                            {})

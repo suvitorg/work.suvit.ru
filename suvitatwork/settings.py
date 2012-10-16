@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Django settings for suvitatwork project.
 
 import os
@@ -190,6 +191,38 @@ LOGIN_URL = '/accounts/signin/'
 LOGOUT_URL = '/accounts/signout/'
 
 ANONYMOUS_USER_ID = -1
+
+PLAN_FEATURES = {
+    'contact': 'Прием заявок через',
+    'work_time': 'Время приема заявок',
+    'response_time': 'Время ответа на заявку',
+}
+
+PLANS = [
+    {'name': 'Бесплатный',
+     'contact': ['email', 'smartnut'],
+     'response_time': '2 недели',
+     'cost': 0,
+    },
+    {'name': 'Базовый',
+     'contact': ['email', 'smartnut', 'phone'],
+     'work_time': '5х8. с 10 до 19. перерыв с 13 до 14',
+     'response_time': '2 часа',
+     'cost': 5000,
+    },
+    {'name': 'Расширенный',
+     'contact': ['email', 'smartnut', 'phone'],
+     'work_time': '5х10. с 9 до 19',
+     'response_time': '2 часа',
+     'cost': 10000,
+    },
+    {'name': 'Круглосуточный',
+     'contact': ['email', 'smartnut', 'phone'],
+     'response_time': '1 часа',
+     'work_time': '7х24. круглосуточно',
+     'cost': 15000,
+    },
+]
 
 try:
     from settings_local import *

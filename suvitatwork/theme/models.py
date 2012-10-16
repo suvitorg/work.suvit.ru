@@ -9,3 +9,4 @@ class MyProfile(UserenaLanguageBaseProfile):
                                 unique=True,
                                 verbose_name='User',
                                 related_name='my_profile')
+

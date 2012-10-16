@@ -1,1 +1,8 @@
 {% extends 'base.html' %}
+{% load url from future %}
+
+{% block content %}
+<p><a href="{% url 'support_plans' %}">Тарифы</a></p>
+<p><a href="{% url 'support_docs' %}">Документы</a></p>
+<p><a href="{% url 'support_browsers' %}">Поддерживаемые браузеры</a></p>
+{% endblock %}

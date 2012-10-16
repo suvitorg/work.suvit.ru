@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load work_tags %}
+
+{% block content %}
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Характеристика
+      </th>
+      {% for plan in plans %}
+        <th>{{ plan.name }}</th>
+      {% endfor %}
+    </tr>
+  </thead>
+  <tbody>
+    {% for feature in features.items %}
+    <tr>
+      <td>{{ feature.1 }}
+      </td>
+      {% for plan in plans %}
+        <td>{{ plan|key:feature.0 }}</td>
+      {% endfor %}
+    </tr>
+    {% endfor %}
+    </tr>
+    <tr class="info">
+      <td>Стоимость</td>
+      {% for plan in plans %}
+        <td>{{ plan.cost }} руб.</td>
+      {% endfor %}
+
+    </tr>
+  </tbody>
+<table>
+{% endblock %}
