@@ -192,13 +192,15 @@ LOGOUT_URL = '/accounts/signout/'
 
 ANONYMOUS_USER_ID = -1
 
-PLAN_FEATURES = {
-    'contact': 'Прием заявок через',
-    'work_time': 'Время приема заявок',
-    'response_time': 'Время ответа на заявку',
-    'include_hours': 'Количество часов включенных в план',
-    'extra_hour_cost': 'Стоимость часа сверх включенных, руб',
-}
+from django.utils.datastructures import SortedDict
+
+PLAN_FEATURES = SortedDict([
+    ('contact', 'Прием заявок через'),
+    ('work_time', 'Время приема заявок'),
+    ('response_time', 'Время ответа на заявку'),
+    ('include_hours', 'Количество часов включенных в план'),
+    ('extra_hour_cost', 'Стоимость часа сверх включенных, руб'),
+])
 
 PLANS = [
     {'name': 'Бесплатный',
