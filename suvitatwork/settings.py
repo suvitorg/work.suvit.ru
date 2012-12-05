@@ -90,6 +90,7 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+    'compressor.finders.CompressorFinder',
 )
 
 # Make this unique, and don't share it with anybody.
@@ -110,6 +111,8 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.messages.middleware.MessageMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'fiber.middleware.ObfuscateEmailAddressMiddleware',
+    'fiber.middleware.AdminPageMiddleware',
 ]
 if PRODUCTION:
     MIDDLEWARE_CLASSES.insert(0, 'django.middleware.cache.UpdateCacheMiddleware')
@@ -138,6 +141,11 @@ INSTALLED_APPS = (
     'django.contrib.markup',
 
     'knowledge',
+
+    'djangorestframework',
+    'mptt',
+    'compressor',
+    'fiber',
 
     'suvitatwork.theme',
 

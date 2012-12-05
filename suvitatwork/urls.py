@@ -16,4 +16,9 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
+
+    url(r'^api/v2/', include('fiber.rest_api.urls')),
+    url(r'^admin/fiber/', include('fiber.admin_urls')),
+    url(r'^jsi18n/$', 'django.views.i18n.javascript_catalog', {'packages': ('fiber',),}),
+    url(r'', 'fiber.views.page'),
 )

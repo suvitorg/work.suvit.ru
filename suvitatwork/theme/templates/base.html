@@ -1,4 +1,5 @@
 {% load url from future %}
+{% load fiber_tags %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -74,12 +75,7 @@
           {% endif  %}
           </div>
           <div class="nav-collapse">
-            <ul class="nav">
-              <li class="active"><a href="{% url 'home' %}">Главная</a></li>
-              <li><a href="{% url 'contacts' %}">Контакты</a></li>
-              <li><a href="{% url 'support' %}">Поддержка сайта</a></li>
-              <li><a href="{% url 'knowledge_index' %}">Центр поддержки</a></li>
-            </ul>
+            {% show_menu "Suvit" 1 1 %}
           </div><!--/.nav-collapse -->
         </div>
       </div>
@@ -103,8 +99,8 @@
         <div class="span9">
           {% block content %}
           <div class="hero-unit">
-            <h1>{% block content_title %}{% if params.content_title %}{{params.content_title}}{% else %}Привет, друг!{% endif %}{% endblock %}</h1>
-            <p>Сайт находится в стадии активной разработки</p>
+            <h1>{% block content_title %}{% if fiber_page.title %}{{fiber_page.title}}{% else %}Привет, друг!{% endif %}{% endblock %}</h1>
+            {% show_page_content 'content_main' %}
           </div>
           {% endblock %}
         </div><!--/span-->
