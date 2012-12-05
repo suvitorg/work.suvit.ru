@@ -1,0 +1,7 @@
+- model: knowledge.category
+  pk: 1
+  fields:
+    title: FAQ
+    slug: faq
+    added: '2012-12-05 18:10:00'
+    lastchanged: '2012-12-05 18:10:00'
