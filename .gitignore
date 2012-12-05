@@ -5,3 +5,6 @@ env
 base.sqlite
 python.bat
 local_settings.py
+.project
+.pydevproject
+.settings/

@@ -37,7 +37,7 @@
     {% block styleextra %}
     {% endblock %}
     </style>
-    
+
     {% block headextra %}
     {% endblock %}
   </head>
@@ -78,6 +78,7 @@
               <li class="active"><a href="{% url 'home' %}">Главная</a></li>
               <li><a href="{% url 'contacts' %}">Контакты</a></li>
               <li><a href="{% url 'support' %}">Поддержка сайта</a></li>
+              <li><a href="{% url 'knowledge_index' %}">Центр поддержки</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>
@@ -133,7 +134,7 @@
             w.yaCounter17288095 = new Ya.Metrika({id:17288095, enableAll: true, webvisor:true});
         } catch(e) { }
     });
-    
+
     var n = d.getElementsByTagName("script")[0],
         s = d.createElement("script"),
         f = function () { n.parentNode.insertBefore(s, n); };

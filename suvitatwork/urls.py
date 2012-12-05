@@ -9,6 +9,7 @@ urlpatterns = patterns('',
     url(r'^', include('suvitatwork.theme.urls')),
     url(r'^accounts/', include('userena.urls')),
     url(r'^messages/', include('userena.contrib.umessages.urls')),
+    url(r'^knowledge/', include('knowledge.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
