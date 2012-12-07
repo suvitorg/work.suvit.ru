@@ -1,0 +1,30 @@
+{% extends "admin/change_form.html" %}
+
+{% load i18n admin_static admin_modify %}
+{% load url from future %}
+{% load admin_urls %}
+
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+<a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
+&rsaquo; <a href="{% url 'admin:app_list' app_label=opts.app_label %}">{{ app_label|capfirst|escape }}</a>
+&rsaquo; {% if has_change_permission %}<a href="{% url opts|admin_urlname:'changelist' %}">{{ opts.verbose_name_plural|capfirst }}</a>{% else %}{{ opts.verbose_name_plural|capfirst }}{% endif %}
+&rsaquo; {% if has_change_permission %}<a href="{% url opts|admin_urlname:'change' object_id %}">{{ opts.verbose_name|truncatewords:"18" }}</a>{% else %}{{ opts.verbose_name|truncatewords:"18" }}{% endif %}
+&rsaquo; Отправить сообщение
+</div>
+{% endblock %}
+
+{% block content_title %}
+  <h1>Отправить сообщение</h1>
+{% endblock %}
+
+{% block content %}
+  {% if not profile.phone %}
+    <a href="{% url opts|admin_urlname:'change' object_id %}">Сначала заполните телефон профиля</a>
+  {% else %}
+  <form method="post" action=".">{% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Отправить" />
+  </form>
+  {% endif %}
+{% endblock %}

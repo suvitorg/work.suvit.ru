@@ -1,0 +1,16 @@
+{% extends "admin/change_form.html" %}
+{% load i18n %}
+{% block object-tools %}
+{% if change %}
+        {% if not is_popup %}
+            <ul class="object-tools">
+                <li>
+                    <a href="history/" class="historylink">История</a>
+                </li>
+                <li>
+                    <a href="send_sms/" class="historylink">Отправить сообщение</a>
+                </li>
+            </ul>
+        {% endif %}
+{% endif %}
+{% endblock %}
