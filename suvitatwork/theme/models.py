@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.contrib.auth.models import User
 from django.db import models
 
@@ -38,7 +39,7 @@ class Project(models.Model):
                              max_length=150)
     description = models.TextField(u"Описание",
                                    null=True, blank=True)
-    repositary = models.CharField(u"Репозитарий",
+    repository = models.CharField(u"Репозитарий",
                                   max_length=150)
     client = models.ForeignKey(Client,
                                verbose_name=u"Клиент",
