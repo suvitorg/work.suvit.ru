@@ -153,6 +153,7 @@ INSTALLED_APPS = (
     'userena.contrib.umessages',
     'guardian',
     'easy_thumbnails',
+    'south',
 )
 
 # A sample logging configuration. The only tangible logging
