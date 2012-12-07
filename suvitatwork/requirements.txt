@@ -6,5 +6,4 @@ django-userena
 django-knowledge
 django-fiber
 south
-
-#django-websmsru
+django-sendsmsru

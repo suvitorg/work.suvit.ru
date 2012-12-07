@@ -154,6 +154,7 @@ INSTALLED_APPS = (
     'guardian',
     'easy_thumbnails',
     'south',
+    'sendsmsru',
 )
 
 # A sample logging configuration. The only tangible logging
