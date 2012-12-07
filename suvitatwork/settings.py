@@ -147,14 +147,14 @@ INSTALLED_APPS = (
     'compressor',
     'fiber',
 
-    'suvitatwork.theme',
-
     'userena',
     'userena.contrib.umessages',
     'guardian',
     'easy_thumbnails',
     'south',
     'sendsmsru',
+
+    'suvitatwork.theme',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -249,6 +249,11 @@ PLANS = [
      'cost': 15000,
     },
 ]
+
+SENDSMS_BACKEND = 'sendsmsru.backends.websmsru.SMTPClient'
+SENDSMS_DEFAULT_FROM_PHONE = 'SUVIT'
+WEBSMSRU_USERNAME = 'suvit'
+WEBSMSRU_PASSWORD = 'Dy4t9a6Ahx'
 
 try:
     from settings_local import *
