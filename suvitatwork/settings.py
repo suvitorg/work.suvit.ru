@@ -125,6 +125,8 @@ ROOT_URLCONF = 'suvitatwork.urls'
 WSGI_APPLICATION = 'suvitatwork.wsgi.application'
 
 TEMPLATE_DIRS = (
+    os.path.join(Path(__file__).ancestor(1), 'theme', "templates"),
+
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
