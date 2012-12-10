@@ -250,7 +250,7 @@ PLANS = [
     },
 ]
 
-SENDSMS_BACKEND = 'sendsmsru.backends.websmsru.SMTPClient'
+SENDSMS_BACKEND = 'sendsmsru.backends.websmsru.HTTPClient'
 SENDSMS_DEFAULT_FROM_PHONE = 'SUVIT'
 WEBSMSRU_USERNAME = 'suvit'
 WEBSMSRU_PASSWORD = 'Dy4t9a6Ahx'
