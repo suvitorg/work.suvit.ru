@@ -10,17 +10,17 @@ from suvitatwork.theme.forms import SmsForm
 
 from sendsms.message import SmsMessage
 
-admin.site.register(Client)
 admin.site.register(Service)
 admin.site.register(Project)
 admin.site.register(Work)
 
 
 
-class MyProfileAdmin(admin.ModelAdmin):
+class ClientAdmin(admin.ModelAdmin):
 
     def send_sms(self, request, object_id):
-        profile = get_object_or_404(MyProfile, pk=object_id)
+        client = get_object_or_404(Client, pk=object_id)
+        profile = client.user.get_profile()
         phone = profile.phone
         form = SmsForm(data=request.POST or None)
         if request.method == 'POST' and form.is_valid() and phone:
@@ -29,10 +29,11 @@ class MyProfileAdmin(admin.ModelAdmin):
             return HttpResponseRedirect('..')
 
         return render(request,
-                      'admin/theme/myprofile/send_sms.html',
+                      'admin/theme/client/send_sms.html',
                       {'form': form,
                        'profile': profile,
                        'opts': self.model._meta,
+                       'profile_opts': MyProfile._meta,
                        'object_id': object_id,
                        'has_change_permission': self.has_change_permission(request, None),
                        'app_label': self.model._meta.app_label})
@@ -53,11 +54,10 @@ class MyProfileAdmin(admin.ModelAdmin):
                 name='%s_%s_send_sms' % info),
         )
 
-        urls += super(MyProfileAdmin, self).get_urls()
+        urls += super(ClientAdmin, self).get_urls()
 
         return urls
 
-admin.site.unregister(MyProfile)
-admin.site.register(MyProfile, MyProfileAdmin)
+admin.site.register(Client, ClientAdmin)
 
 
