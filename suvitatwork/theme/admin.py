@@ -24,7 +24,7 @@ class ClientAdmin(admin.ModelAdmin):
         phone = profile.phone
         form = SmsForm(data=request.POST or None)
         if request.method == 'POST' and form.is_valid() and phone:
-            SmsMessage(form.cleaned_data['message'], to=phone).send()
+            SmsMessage(form.cleaned_data['message'], to=[phone]).send()
             messages.add_message(request, messages.INFO, u"Сообщение отправлено")
             return HttpResponseRedirect('..')
 

@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block headextra %}
+  <link rel="stylesheet" href="{{ STATIC_URL }}knowledge/css/reset.css">
+  <link rel="stylesheet" href="{{ STATIC_URL }}knowledge/css/main.css">
+{% endblock %}
+
+
+{% block content %}
+  {% block knowledge_inner %}
+  {% endblock knowledge_inner %}
+{% endblock %}
