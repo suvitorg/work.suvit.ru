@@ -21,6 +21,9 @@ class Client(models.Model):
                              verbose_name=u"Пользователь",
                              related_name='clients')
 
+    def __unicode__(self):
+        return u"Клиент для %s" % self.user
+
 
 class Service(models.Model):
     title = models.CharField(u"Название",
@@ -32,6 +35,9 @@ class Service(models.Model):
     clients = models.ManyToManyField(Client,
                                      verbose_name=u"Клиенты",
                                      related_name='services')
+
+    def __unicode__(self):
+        return u"Услуга %s" % self.title
 
 
 class Project(models.Model):
@@ -45,6 +51,9 @@ class Project(models.Model):
                                verbose_name=u"Клиент",
                                related_name='projects')
 
+    def __unicode__(self):
+        return u"Проект %s" % self.title
+
 
 class Work(models.Model):
     description = models.TextField(u"Описание")
@@ -56,3 +65,6 @@ class Work(models.Model):
                                      max_digits=10,
                                      decimal_places=2,
                                      default='0')
+
+    def __unicode__(self):
+        return u"%s выполнил: %s" % (self.executor, self.description)
