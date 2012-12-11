@@ -3,7 +3,7 @@ Unipath
 PyYAML
 git+https://github.com/suvit/django-mailer.git#egg=django-mailer
 django-userena
-django-knowledge
+git+https://github.com/suvit/django-knowledge.git
 django-fiber
 south
 django-sendsmsru
