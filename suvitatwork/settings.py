@@ -222,6 +222,12 @@ SENDSMS_DEFAULT_FROM_PHONE = 'SUVIT'
 WEBSMSRU_USERNAME = 'suvit'
 WEBSMSRU_PASSWORD = str(SECRETS['websms_key'])
 
+COMPRESS_ENABLED = False
+
+KNOWLEDGE_ALERTS = True
+KNOWLEDGE_SLUG_URLS = True
+KNOWLEDGE_SLUG_SLUGIFY = 'pytils.translit.slugify'
+
 try:
     from settings_local import *
 except ImportError:
