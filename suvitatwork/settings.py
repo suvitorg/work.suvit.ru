@@ -255,9 +255,14 @@ PLANS = [
 SENDSMS_BACKEND = 'sendsmsru.backends.websmsru.HTTPClient'
 SENDSMS_DEFAULT_FROM_PHONE = 'SUVIT'
 WEBSMSRU_USERNAME = 'suvit'
-WEBSMSRU_PASSWORD = 'Dy4t9a6Ahx'
+WEBSMSRU_PASSWORD = str(SECRETS['websms_key'])
 
 try:
     from settings_local import *
 except ImportError:
     pass
+
+if globals().get('SENTRY_DSN') is not None:  # may changed in settings_local
+    INSTALLED_APPS += (
+        'raven.contrib.django',
+    )
