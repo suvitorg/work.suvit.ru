@@ -32,7 +32,7 @@ class SuvitWorkDeployment(Deployment):
                                           settings_local=_('settings/settings_prod.py'),
                                           python_path=_('%(remote_dir)s/env/bin/python'))
         fab.env.project.django.USE_STATICFILES = True
-        fab.env.project.django.USE_SOUTH = False
+        fab.env.project.django.USE_SOUTH = True
 
         fab.env.server = FcgiWrapper(domain='work.suvit.ru')
 
