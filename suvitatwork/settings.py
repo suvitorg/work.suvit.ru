@@ -146,41 +146,6 @@ INSTALLED_APPS = (
     'suvitatwork.theme',
 )
 
-# A sample logging configuration. The only tangible logging
-# performed by this configuration is to send an email to
-# the site admins on every HTTP 500 error when DEBUG=False.
-# See http://docs.djangoproject.com/en/dev/topics/logging for
-# more details on how to customize your logging configuration.
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'filters': {
-        'require_debug_false': {
-            '()': 'django.utils.log.RequireDebugFalse'
-        }
-    },
-    'handlers': {
-        'mail_admins': {
-            'level': 'ERROR',
-            'filters': ['require_debug_false'],
-            'class': 'django.utils.log.AdminEmailHandler'
-        }
-    },
-    'loggers': {
-        'django.request': {
-            'handlers': ['mail_admins'],
-            'level': 'ERROR',
-            'propagate': True,
-        },
-    }
-}
-
-# Log errors to Sentry instead of email, if available.
-if 'sentry_dsn' in SECRETS:
-    INSTALLED_APPS.append('raven.contrib.django')
-    SENTRY_DSN = SECRETS['sentry_dsn']
-    LOGGING["loggers"]["django.request"]["handlers"].remove("mail_admins")
-
 AUTHENTICATION_BACKENDS = (
     'userena.backends.UserenaAuthenticationBackend',
     'guardian.backends.ObjectPermissionBackend',
@@ -242,9 +207,20 @@ PLANS = [
 SENDSMS_BACKEND = 'sendsmsru.backends.websmsru.HTTPClient'
 SENDSMS_DEFAULT_FROM_PHONE = 'SUVIT'
 WEBSMSRU_USERNAME = 'suvit'
-WEBSMSRU_PASSWORD = str(SECRETS['websms_password'])
+WEBSMSRU_PASSWORD = str(SECRETS['websms_key'])
+
+COMPRESS_ENABLED = False
+
+KNOWLEDGE_ALERTS = True
+KNOWLEDGE_SLUG_URLS = True
+KNOWLEDGE_SLUG_SLUGIFY = 'pytils.translit.slugify'
 
 try:
     from settings_local import *
 except ImportError:
     pass
+
+if globals().get('SENTRY_DSN') is not None:  # may changed in settings_local
+    INSTALLED_APPS += (
+        'raven.contrib.django',
+    )

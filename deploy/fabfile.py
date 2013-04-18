@@ -28,9 +28,9 @@ class SuvitWorkDeployment(Deployment):
         fab.env.db = SqliteDatabase()
 
         fab.env.project = Project()
-        fab.env.project.django = Django14(_('%(remote_dir)s/%(project_name)s/'),
-                                          settings_local=_('settings/settings_prod.py'),
-                                          python_path=_('%(remote_dir)s/env/bin/python'))
+        fab.env.project.django = fab.env.django = Django14(_('%(remote_dir)s/%(project_name)s/'),
+                                                  settings_local=_('settings/settings_prod.py'),
+                                                  python_path=_('%(remote_dir)s/env/bin/python'))
         fab.env.project.django.USE_STATICFILES = True
         fab.env.project.django.USE_SOUTH = True
 

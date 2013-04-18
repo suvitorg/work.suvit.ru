@@ -1,9 +1,12 @@
 django>=1.4
 Unipath
 PyYAML
-git+https://github.com/suvit/django-mailer.git#egg=django-mailer
 django-userena
 git+https://github.com/suvit/django-knowledge.git
 django-fiber
-south
 django-sendsmsru
+
+#production
+git+https://github.com/suvit/django-mailer.git#egg=django-mailer
+south
+raven
